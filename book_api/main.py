@@ -1,6 +1,5 @@
 from fastapi import FastAPI
-from book_api.books import router
+from books import router
 
 app = FastAPI()
-
 app.include_router(router)
