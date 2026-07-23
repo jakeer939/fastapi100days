@@ -6,3 +6,8 @@ class Book(BaseModel):
     country:str
     language:str
     price:int
+    
+class BookResponse(BaseModel):
+    name:str
+    author:str
+    price:int

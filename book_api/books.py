@@ -1,7 +1,8 @@
 from book_api.database import books
 from book_api.models import Book
-from fastapi import APIRouter,HTTPException
-
+from fastapi import APIRouter,HTTPException,status
+from book_api.models import BookResponse
+from typing import List
 router = APIRouter()
 
 def book_id():
@@ -15,18 +16,18 @@ def book_id():
 def home():
     return {"msg":"this api is a basic todo api"}
 
-@router.get("/books")
+@router.get("/books",response_model=List[BookResponse],status_code=status.HTTP_200_OK)
 def get_all_books():
     return books
 
-@router.get("/books/{book_id}")
+@router.get("/books/{book_id}",status_code=status.HTTP_200_OK)
 def get_book(book_id:int):
     for book in books:
         if book["id"] == book_id:
             return book
     raise HTTPException(status_code=404, detail="book not found")
 
-@router.post("/books/create")
+@router.post("/books",status_code=status.HTTP_201_CREATED)
 def add_book(book:Book):
     mx_id = book_id()
     new_book = {
@@ -39,7 +40,7 @@ def add_book(book:Book):
         "book" : new_book
     }
 
-@router.put("/books/update/{book_id}")
+@router.put("/books/{book_id}",status_code=status.HTTP_200_OK)
 def update_book(book_id:int,up_book:Book):
     c = False
     for book in books:
@@ -58,7 +59,7 @@ def update_book(book_id:int,up_book:Book):
     raise HTTPException(status_code=404,detail="book not found")
     
 
-@router.patch("/books/delete/{book_id}")
+@router.delete("/books/{book_id}",status_code=status.HTTP_204_NO_CONTENT)
 def del_book(book_id:int):
     for book in books:
         if book["id"] == book_id:
