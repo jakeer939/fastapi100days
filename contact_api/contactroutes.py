@@ -1,4 +1,4 @@
-from fastapi import APIRouter,HTTPException,status
+from fastapi import APIRouter,HTTPException,status,Depends
 from contact_api.database import contacts
 from contact_api.models import Contacts
 
@@ -27,8 +27,7 @@ def get_user(user_id:int):
     raise HTTPException(status_code=404,detail="not found")
 
 @router.post("/contacts",status_code=status.HTTP_201_CREATED)
-def add_user(contact:Contacts):
-    id_n = id_val()
+def add_user(contact:Contacts, id_n:int = Depends(id_val)):
     if(len(contact.phone)==10 and contact.phone.isdigit()):
         new_val = {
             "id":id_n,
