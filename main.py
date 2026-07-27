@@ -1,6 +1,13 @@
-from fastapi import FastAPI
-from contact_api.contactroutes import router
+from database import engine,SessionLocal
+from databasemodel import Base
+from fastapi import FastAPI, Depends
 
 app = FastAPI()
+Base.metadata.create_all(bind=engine)
 
-app.include_router(router)
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
