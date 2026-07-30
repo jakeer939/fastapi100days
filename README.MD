@@ -1,59 +1,42 @@
-# Day 2 - FastAPI CRUD with SQLite
+# PhoneBook Contact API
 
 ## Overview
 
-Today I focused on learning how FastAPI interacts with SQLite using SQLAlchemy. The goal was to understand the complete CRUD workflow and the purpose of each component instead of just following syntax.
-
-## Topics Covered
-
-- FastAPI project structure
-- SQLAlchemy ORM
-- SQLite database connection
-- Engine and SessionLocal
-- Dependency Injection using `Depends`
-- Database sessions
-- SQLAlchemy Models
-- Pydantic Request Models
-- CRUD Operations
-- HTTP Exception Handling
-- SQLAlchemy `select()` queries
-
-## Implemented Features
-
-### Create
-- Add a new todo
-- Automatic ID generation using SQLite
-- Request validation using Pydantic
-
-### Read
-- Get all todos
-- Get a todo by ID
-
-### Update
-- Update todo details
-- Commit changes to the database
-- Refresh updated object
-
-### Delete
-- Delete a todo by ID
-- Handle invalid IDs
-
-## Key Concepts Learned
-
-- Difference between SQLAlchemy Models and Pydantic Models
-- Why `Session` is required
-- Purpose of `Depends(get_db)`
-- Why `yield` is used instead of `return`
-- Difference between `db.get()` and `select()`
-- When to use `db.refresh()`
-- Automatic primary key generation
-- ORM maps Python classes to database tables
+Built the foundation of a simple Contact Management REST API using **FastAPI**, **SQLAlchemy**, and **SQLite**. The project currently supports creating contacts and retrieving all saved contacts.
 
 ## Tech Stack
 
-- Python
-- FastAPI
-- SQLAlchemy
-- SQLite
-- Pydantic
-- Uvicorn
+* FastAPI
+* SQLAlchemy ORM
+* SQLite
+* Pydantic
+
+## Features Implemented
+
+### Create a New Contact
+
+* Accepts contact details through a POST request.
+* Validates request data using Pydantic.
+* Stores the contact in the SQLite database.
+
+### Get All Contacts
+
+* Retrieves all contacts stored in the database.
+* Returns the data as a JSON response.
+
+## API Endpoints
+
+| Method | Endpoint    | Description           |
+| ------ | ----------- | --------------------- |
+| `GET`  | `/contacts` | Retrieve all contacts |
+| `POST` | `/contacts` | Create a new contact  |
+
+## Concepts Practiced
+
+* Setting up a FastAPI project
+* Connecting FastAPI with SQLite using SQLAlchemy
+* Creating ORM models
+* Using Pydantic request models
+* Managing database sessions with dependency injection
+* Implementing basic CRUD operations (Create & Read)
+
