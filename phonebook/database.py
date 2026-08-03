@@ -14,4 +14,5 @@ sessionLocal = sessionmaker(
     bind=engine
 )
 
+# base for table models 
 Base = declarative_base()
