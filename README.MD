@@ -1,42 +1,148 @@
-# PhoneBook Contact API
+# Day 3 - FastAPI Authentication & Authorization
 
 ## Overview
 
-Built the foundation of a simple Contact Management REST API using **FastAPI**, **SQLAlchemy**, and **SQLite**. The project currently supports creating contacts and retrieving all saved contacts.
+Today's work focused on securing the Todo API using JWT-based authentication and implementing role-based authorization. The project now supports protected routes, user-specific data access, password updates, and administrator-only operations.
 
-## Tech Stack
-
-* FastAPI
-* SQLAlchemy ORM
-* SQLite
-* Pydantic
+---
 
 ## Features Implemented
 
-### Create a New Contact
+### JWT Authentication
+- Configured `OAuth2PasswordBearer`.
+- Protected API endpoints using bearer tokens.
+- Implemented `get_current_user()` dependency to extract and validate user information from JWT.
 
-* Accepts contact details through a POST request.
-* Validates request data using Pydantic.
-* Stores the contact in the SQLite database.
+### User Authorization
+- Restricted all Todo operations to authenticated users.
+- Users can only access their own todos.
+- Ownership validation added for:
+  - Get Todo
+  - Update Todo
+  - Delete Todo
 
-### Get All Contacts
+### Todo API Improvements
+- Added router prefix and tags.
 
-* Retrieves all contacts stored in the database.
-* Returns the data as a JSON response.
+```
+/todos
+```
 
-## API Endpoints
+Available endpoints:
 
-| Method | Endpoint    | Description           |
-| ------ | ----------- | --------------------- |
-| `GET`  | `/contacts` | Retrieve all contacts |
-| `POST` | `/contacts` | Create a new contact  |
+| Method | Endpoint | Description |
+|---------|----------|-------------|
+| GET | `/todos/` | Get authenticated user's todos |
+| GET | `/todos/{id}` | Get a specific todo |
+| POST | `/todos/` | Create a todo |
+| PUT | `/todos/{id}` | Update a todo |
+| DELETE | `/todos/{id}` | Delete a todo |
 
-## Concepts Practiced
+---
 
-* Setting up a FastAPI project
-* Connecting FastAPI with SQLite using SQLAlchemy
-* Creating ORM models
-* Using Pydantic request models
-* Managing database sessions with dependency injection
-* Implementing basic CRUD operations (Create & Read)
+## Admin Module
 
+Created a dedicated Admin Router.
+
+```
+/admin
+```
+
+### Admin Features
+
+- View all todos.
+- Delete any todo regardless of owner.
+- Role-based authorization using JWT claims.
+
+Only users with:
+
+```
+role = "admin"
+```
+
+can access these endpoints.
+
+---
+
+## User Module
+
+Created a dedicated User Router.
+
+```
+/user
+```
+
+### User Features
+
+- View authenticated user's profile.
+- Change account password.
+- Verify current password before updating.
+- Store new password securely using bcrypt hashing.
+
+---
+
+## Security Improvements
+
+- JWT-protected endpoints.
+- Role-based access control.
+- Ownership validation.
+- Password hashing with bcrypt.
+- Password verification before updates.
+- Protected admin routes.
+- Protected user profile routes.
+
+---
+
+## Concepts Learned
+
+- OAuth2PasswordBearer
+- JWT Authentication
+- Protected Routes
+- Dependency Injection
+- Role-Based Authorization (RBAC)
+- User Ownership Validation
+- Password Verification
+- Password Update Flow
+- SQLAlchemy Authorization Queries
+- FastAPI Router Organization
+
+---
+
+## Project Structure
+
+```
+Todosapp/
+│
+├── auth.py
+├── admin.py
+├── users.py
+├── todos.py
+├── database.py
+├── databasemodel.py
+└── main.py
+```
+
+---
+
+## Tech Stack
+
+- FastAPI
+- SQLAlchemy
+- SQLite
+- Pydantic
+- Passlib (bcrypt)
+- Python-JOSE (JWT)
+- OAuth2PasswordBearer
+- Uvicorn
+
+---
+
+## Key Takeaways
+
+- Built a complete JWT authentication workflow.
+- Secured CRUD endpoints using authentication and authorization.
+- Implemented admin-only functionality.
+- Added user profile management with secure password updates.
+- Organized the backend into separate routers for authentication, todos, users, and admin operations.
+
+---
