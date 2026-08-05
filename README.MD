@@ -1,148 +1,59 @@
-# Day 3 - FastAPI Authentication & Authorization
+FastAPI Revision
+Overview
 
-## Overview
+Today's session focused on revising FastAPI fundamentals by building a PhoneBook REST API using FastAPI, SQLAlchemy, SQLite, and Pydantic. The emphasis was on understanding CRUD operations, dependency injection, response models, and common debugging scenarios.
 
-Today's work focused on securing the Todo API using JWT-based authentication and implementing role-based authorization. The project now supports protected routes, user-specific data access, password updates, and administrator-only operations.
-
----
-
-## Features Implemented
-
-### JWT Authentication
-- Configured `OAuth2PasswordBearer`.
-- Protected API endpoints using bearer tokens.
-- Implemented `get_current_user()` dependency to extract and validate user information from JWT.
-
-### User Authorization
-- Restricted all Todo operations to authenticated users.
-- Users can only access their own todos.
-- Ownership validation added for:
-  - Get Todo
-  - Update Todo
-  - Delete Todo
-
-### Todo API Improvements
-- Added router prefix and tags.
-
-```
-/todos
-```
-
-Available endpoints:
-
-| Method | Endpoint | Description |
-|---------|----------|-------------|
-| GET | `/todos/` | Get authenticated user's todos |
-| GET | `/todos/{id}` | Get a specific todo |
-| POST | `/todos/` | Create a todo |
-| PUT | `/todos/{id}` | Update a todo |
-| DELETE | `/todos/{id}` | Delete a todo |
-
----
-
-## Admin Module
-
-Created a dedicated Admin Router.
-
-```
-/admin
-```
-
-### Admin Features
-
-- View all todos.
-- Delete any todo regardless of owner.
-- Role-based authorization using JWT claims.
-
-Only users with:
-
-```
-role = "admin"
-```
-
-can access these endpoints.
-
----
-
-## User Module
-
-Created a dedicated User Router.
-
-```
-/user
-```
-
-### User Features
-
-- View authenticated user's profile.
-- Change account password.
-- Verify current password before updating.
-- Store new password securely using bcrypt hashing.
-
----
-
-## Security Improvements
-
-- JWT-protected endpoints.
-- Role-based access control.
-- Ownership validation.
-- Password hashing with bcrypt.
-- Password verification before updates.
-- Protected admin routes.
-- Protected user profile routes.
-
----
-
-## Concepts Learned
-
-- OAuth2PasswordBearer
-- JWT Authentication
-- Protected Routes
-- Dependency Injection
-- Role-Based Authorization (RBAC)
-- User Ownership Validation
-- Password Verification
-- Password Update Flow
-- SQLAlchemy Authorization Queries
-- FastAPI Router Organization
-
----
-
-## Project Structure
-
-```
-Todosapp/
-│
-├── auth.py
-├── admin.py
-├── users.py
-├── todos.py
-├── database.py
-├── databasemodel.py
-└── main.py
-```
-
----
-
-## Tech Stack
-
-- FastAPI
-- SQLAlchemy
-- SQLite
-- Pydantic
-- Passlib (bcrypt)
-- Python-JOSE (JWT)
-- OAuth2PasswordBearer
-- Uvicorn
-
----
-
-## Key Takeaways
-
-- Built a complete JWT authentication workflow.
-- Secured CRUD endpoints using authentication and authorization.
-- Implemented admin-only functionality.
-- Added user profile management with secure password updates.
-- Organized the backend into separate routers for authentication, todos, users, and admin operations.
-
----
+Topics Revised
+FastAPI project structure
+APIRouter configuration
+Dependency Injection with Depends
+SQLAlchemy ORM models
+Pydantic request and response models
+SQLite database integration
+CRUD operations
+HTTP status codes and exception handling
+Password hashing using passlib
+Work Completed
+Project Setup
+Configured main.py as the application entry point.
+Registered API routers.
+Connected the SQLite database.
+Created database tables using SQLAlchemy metadata.
+PhoneBook API
+Implemented GET endpoint to retrieve all contacts.
+Implemented POST endpoint to create a new contact.
+Implemented PUT endpoint to update an existing contact.
+Added dependency injection for database sessions.
+Used SQLAlchemy ORM for database operations.
+Added response validation using Pydantic models.
+Implemented proper error handling for missing contacts.
+User API
+Created the Users database model.
+Implemented user creation endpoint.
+Added password hashing using bcrypt.
+Configured user retrieval endpoint.
+Debugging & Fixes
+Fixed router prefix configuration.
+Corrected response_model definitions.
+Fixed missing return statement causing ResponseValidationError.
+Resolved SQLite schema mismatch (owner_id column).
+Corrected SQLAlchemy query to use ORM models instead of Pydantic models.
+Fixed incorrect db.commit() usage.
+Fixed update logic by modifying ORM object attributes instead of calling the object.
+Corrected tuple assignment caused by a trailing comma.
+Improved understanding of .scalar(), .scalars(), .all(), and db.refresh().
+Key Concepts Revised
+Difference between SQLAlchemy models and Pydantic schemas.
+Why Base.metadata.create_all() does not update existing tables.
+Difference between db.scalar() and db.scalars().
+Purpose of db.commit() and db.refresh().
+Request model vs Response model.
+Dependency Injection with Depends.
+Password hashing workflow using passlib.
+Tech Stack
+Python
+FastAPI
+SQLAlchemy
+SQLite
+Pydantic
+Passlib (bcrypt)
