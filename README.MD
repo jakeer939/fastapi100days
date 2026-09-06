@@ -1,59 +1,96 @@
-FastAPI Revision
-Overview
+# FastAPI Backend Engineering
 
-Today's session focused on revising FastAPI fundamentals by building a PhoneBook REST API using FastAPI, SQLAlchemy, SQLite, and Pydantic. The emphasis was on understanding CRUD operations, dependency injection, response models, and common debugging scenarios.
+A hands-on repository for learning and practicing backend development with **FastAPI, SQLAlchemy, Pydantic, and SQLite**.
 
-Topics Revised
-FastAPI project structure
-APIRouter configuration
-Dependency Injection with Depends
-SQLAlchemy ORM models
-Pydantic request and response models
-SQLite database integration
-CRUD operations
-HTTP status codes and exception handling
-Password hashing using passlib
-Work Completed
-Project Setup
-Configured main.py as the application entry point.
-Registered API routers.
-Connected the SQLite database.
-Created database tables using SQLAlchemy metadata.
-PhoneBook API
-Implemented GET endpoint to retrieve all contacts.
-Implemented POST endpoint to create a new contact.
-Implemented PUT endpoint to update an existing contact.
-Added dependency injection for database sessions.
-Used SQLAlchemy ORM for database operations.
-Added response validation using Pydantic models.
-Implemented proper error handling for missing contacts.
-User API
-Created the Users database model.
-Implemented user creation endpoint.
-Added password hashing using bcrypt.
-Configured user retrieval endpoint.
-Debugging & Fixes
-Fixed router prefix configuration.
-Corrected response_model definitions.
-Fixed missing return statement causing ResponseValidationError.
-Resolved SQLite schema mismatch (owner_id column).
-Corrected SQLAlchemy query to use ORM models instead of Pydantic models.
-Fixed incorrect db.commit() usage.
-Fixed update logic by modifying ORM object attributes instead of calling the object.
-Corrected tuple assignment caused by a trailing comma.
-Improved understanding of .scalar(), .scalars(), .all(), and db.refresh().
-Key Concepts Revised
-Difference between SQLAlchemy models and Pydantic schemas.
-Why Base.metadata.create_all() does not update existing tables.
-Difference between db.scalar() and db.scalars().
-Purpose of db.commit() and db.refresh().
-Request model vs Response model.
-Dependency Injection with Depends.
-Password hashing workflow using passlib.
-Tech Stack
-Python
-FastAPI
-SQLAlchemy
-SQLite
-Pydantic
-Passlib (bcrypt)
+The repository contains progressively built APIs and backend exercises covering core FastAPI concepts, database integration, CRUD operations, validation, dependency injection, and authentication-related functionality.
+
+## Current Coverage
+
+- FastAPI application structure
+- API routers with `APIRouter`
+- Dependency injection with `Depends`
+- SQLAlchemy ORM models and sessions
+- Pydantic request and response schemas
+- SQLite database integration
+- CRUD API design
+- HTTP status codes and exception handling
+- Password hashing with bcrypt/passlib
+- User and contact management APIs
+- Book API development
+- Debugging response validation and database issues
+
+## Main Backend Components
+
+### Todo / Contact APIs
+
+Practice projects cover creating, reading, updating, and deleting records with SQLAlchemy-backed persistence.
+
+### User API
+
+Includes user model and user creation/retrieval flows with password hashing.
+
+### Book API
+
+A separate FastAPI + SQLAlchemy API used to practice database-backed resource management.
+
+## Architecture
+
+```text
+HTTP Client
+    │
+    ▼
+FastAPI Routes
+    │
+    ▼
+Pydantic Schemas
+    │
+    ▼
+SQLAlchemy ORM
+    │
+    ▼
+SQLite Database
+```
+
+## Key Concepts
+
+- Request vs response models
+- ORM models vs Pydantic schemas
+- Dependency injection
+- Database session lifecycle
+- `db.commit()` and `db.refresh()`
+- `scalar()` vs `scalars()`
+- Response validation
+- Router organization
+- Exception handling
+- Password hashing
+- CORS configuration
+
+## Repository Structure
+
+```text
+fastapi100days/
+├── Todosapp/
+├── book_api/
+├── contact_api/
+├── README.MD
+└── contact.db
+```
+
+## Tech Stack
+
+- Python
+- FastAPI
+- SQLAlchemy
+- Pydantic
+- SQLite
+- Passlib / bcrypt
+
+## Status
+
+**In progress.** This repository is used to build backend fundamentals through small, working API implementations. The codebase will evolve toward more structured production-style FastAPI applications.
+
+## Author
+
+**Jakeer**
+
+GitHub: [@jakeer939](https://github.com/jakeer939)
